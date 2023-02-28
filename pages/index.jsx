@@ -43,7 +43,7 @@ export default function Home() {
 
         const data = res;
 
-        console.log(data);
+        // console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;
@@ -68,7 +68,7 @@ export default function Home() {
 
         const data = res;
 
-        console.log(data);
+        // console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;
