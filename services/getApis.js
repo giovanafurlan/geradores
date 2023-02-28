@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const getTitle = async (keyword, type) => {
+const getTitle = async (keywords, type) => {
   return axios
     .get("/api/generateTitle", {
-      params: { keyword: keyword, type: type },
+      params: { keywords: keywords, type: type },
     })
     .then((e) => {
       return e.data;
@@ -14,10 +14,10 @@ const getTitle = async (keyword, type) => {
     });
 };
 
-const getDescription = async (keyword, type) => {
+const getDescription = async (keywords, type) => {
   return axios
     .get("/api/generateDescription", {
-      params: { keyword: keyword, type: type },
+      params: { keywords: keywords, type: type },
     })
     .then((e) => {
       return e.data;

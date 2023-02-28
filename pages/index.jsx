@@ -1,10 +1,13 @@
 import { useState } from "react";
 import {
+  Box,
   Button,
   ButtonGroup,
   CircularProgress,
   Flex,
   FormControl,
+  Grid,
+  GridItem,
   Input,
   Select,
   Text,
@@ -20,13 +23,16 @@ export default function Home() {
   const [isLoadingD, setIsLoadingD] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [keyword, setKeyword] = useState();
+  const [keywords, setKeyword] = useState(['flor', 'colorido']);
+  const [id, setId] = useState(1);
+  const [name, setName] = useState('');
   const [type, setType] = useState();
   const [h1, seth1] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
 
   const bg = useColorModeValue('white', 'gray.900');
+  const color = useColorModeValue('primary', 'white');
 
   async function onSubmit() {
 
@@ -35,10 +41,8 @@ export default function Home() {
 
     setVisibility('visible');
 
-    getTitle(keyword, type)
+    getTitle(keywords.toString(), type)
       .then((res) => {
-        // console.log(res);
-
         setIsLoadingT(false);
 
         const data = res;
@@ -60,10 +64,8 @@ export default function Home() {
       })
       .finally();
 
-    getDescription(keyword, type)
+    getDescription(keywords.toString(), type)
       .then((res) => {
-        // console.log(res);
-
         setIsLoadingD(false);
 
         const data = res;
@@ -83,6 +85,20 @@ export default function Home() {
         console.log(err);
       })
       .finally();
+  }
+
+  const handleAddClick = (event) => {
+    event.preventDefault();
+    if (name != '') {
+      setId(id => id + 1);
+      setKeyword(list => [...list, id + '- ' + name]);
+      setName('');
+    }
+  }
+
+  const handleClear = () => {
+    setId(0);
+    setKeyword([]);
   }
 
   function copyHTMLH1() {
@@ -110,28 +126,23 @@ export default function Home() {
   }
 
   return (
-    <Flex
-      flexDir={"column"}
-      gap="6"
-      p='10'>
-      <FormControl
-        className="form">
+    <Grid
+      templateColumns={'repeat(3,1fr)'}
+      gap='6'>
+      <GridItem>
         <Flex
+          flexDir={'column'}
           gap='4'>
-          <Input
-            className="palavra-chave"
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder={'Keyword'}
-            borderRadius={"30px"}
-            bg={bg} />
+          <Text>
+            Tipo de Conteúdo
+          </Text>
           <Select
             id="select-tipo"
             name="tipo"
             onChange={(e) => setType(e.target.value)}
             bg={bg}
             borderRadius={"30px"} >
-            <option value="Portal">
-              Tipo de conteúdo
+            <option value="">
             </option>
             <option value="Loja">
               Loja
@@ -146,56 +157,113 @@ export default function Home() {
               Outro
             </option>
           </Select>
-          <Button
-            onClick={() => { onSubmit() }}
-            variant="button-orange"
-            _hover={{
-              bg: "#FFB596",
-            }}
-            w='40' >
-            Generate
-          </Button>
+          <Text>
+            Keywords to Add
+          </Text>
+          <Flex
+            align={'center'}
+            gap='2'>
+            <Input
+              isRequired={true}
+              bg={bg}
+              value={name}
+              borderRadius={"30px"}
+              onChange={(e) => setName(e.target.value)} />
+            <Button
+              onClick={handleAddClick}
+              variant='button'>
+              Add item
+            </Button>
+            <Button
+              onClick={handleClear}
+              variant='button-outline'
+              color={color}
+              borderColor={color}>
+              Clear list
+            </Button>
+          </Flex>
+          <div>
+            {keywords.map((item) => {
+              const handleRemoveClick = () => {
+                setKeyword(list => list.filter((entry) => entry !== item));
+              };
+              return (
+                <Flex
+                  key={item}
+                  justifyContent={'space-between'}
+                  align='center'>
+                  <Text
+                    fontSize={'lg'}
+                    mt='2'>
+                    {item}
+                  </Text>
+                  <Button
+                    mt='2'
+                    onClick={handleRemoveClick}>
+                    x
+                  </Button>
+                </Flex>
+              )
+            })}
+          </div>
+
+          <Box
+            w='full'>
+            <Button
+              onClick={() => { onSubmit() }}
+              float='right'
+              variant="button-orange"
+              _hover={{
+                bg: "#FFB596",
+              }}
+              w='40' >
+              Generate
+            </Button>
+          </Box>
         </Flex>
-      </FormControl>
-      <Flex
-        visibility={visibility}
-        className="Fields"
-        flexDir={"column"}
-        gap="4">
-        {isLoadingT
-          ?
-          <CircularProgress
-            isIndeterminate />
-          :
-          <>
+      </GridItem>
+      <GridItem
+        colSpan={'2'}>
+        <Flex
+          visibility={visibility}
+          className="Fields"
+          flexDir={"column"}
+          gap="4">
+          {isLoadingT
+            ?
+            <CircularProgress
+              isIndeterminate />
+            :
+            <>
+              <Field
+                id={"h1-textarea"}
+                titulo={'H1'}
+                value={h1}
+                copyText={h1}
+                copyHTML={copyHTMLH1} />
+              <Field
+                id={"title-textarea"}
+                titulo={"Title"}
+                value={title}
+                copyText={title}
+                copyHTML={copyHTMLTitle} />
+            </>
+          }
+          {isLoadingD
+            ?
+            <CircularProgress
+              isIndeterminate />
+            :
             <Field
-              id={"h1-textarea"}
-              titulo={'H1'}
-              value={h1}
-              copyText={h1}
-              copyHTML={copyHTMLH1} />
-            <Field
-              id={"title-textarea"}
-              titulo={"Title"}
-              value={title}
-              copyText={title}
-              copyHTML={copyHTMLTitle} />
-          </>
-        }
-        {isLoadingD
-          ?
-          <CircularProgress
-            isIndeterminate />
-          :
-          <Field
-            id={"description-textarea"}
-            titulo={"Description"}
-            value={description}
-            copyText={description}
-            copyHTML={copyHTMLDescription} />
-        }
-      </Flex>
-    </Flex>
+              id={"description-textarea"}
+              titulo={"Description"}
+              value={description}
+              copyText={description}
+              copyHTML={copyHTMLDescription} />
+          }
+        </Flex>
+      </GridItem>
+    </Grid>
   )
 }
 

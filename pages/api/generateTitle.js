@@ -1,15 +1,7 @@
 var axios = require("axios");
 
 export default function handler(req, res) {
-  const keyword = req.query.keyword || "";
-  if (keyword.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Insira uma palavra chave válida",
-      },
-    });
-    return;
-  }
+  const keywords = req.query.keywords;
 
   const type = req.query.type || "";
   if (type.trim().length === 0) {
@@ -23,7 +15,7 @@ export default function handler(req, res) {
 
   var data = JSON.stringify({
     model: "text-davinci-003",
-    prompt: `Palavra chave: Chá\nTipo: Loja\nTítulo: Experimente o Chá e Desfrute de Uma Experiência Única!\nPalavra chave: ${keyword}\nTipo: ${type}\nTítulo: `,
+    prompt: `Palavra chave: Chá,Sabor\nTipo: Loja\nTítulo: Experimente o Chá e Desfrute de Uma Experiência Única!\nPalavra chave: ${keywords}\nTipo: ${type}\nTítulo: `,
     temperature: 0.5,
     max_tokens: 2000,
     top_p: 1,

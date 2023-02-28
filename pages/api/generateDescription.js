@@ -1,15 +1,7 @@
 var axios = require("axios");
 
 export default function handler(req, res) {
-  const keyword = req.query.keyword || "";
-  if (keyword.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Insira uma palavra chave válida",
-      },
-    });
-    return;
-  }
+  const keywords = req.query.keywords;
 
   const type = req.query.type || "";
   if (type.trim().length === 0) {
@@ -23,7 +15,7 @@ export default function handler(req, res) {
 
   var data = JSON.stringify({
     model: "text-davinci-003",
-    prompt: `Palavra chave: Chá\nTipo: Loja\nDescrição: Venha experimentar o nosso chá e desfrutar de uma experiência única! Oferecemos uma variedade de chás de qualidade, de sabores e aromas únicos. Venha experimentar e descobrir o seu favorito! Aqui na nossa loja você encontrará tudo para desfrutar de uma experiência única com o chá.\nPalavra chave: ${keyword}\nTipo: ${type}\nDescrição:`,
+    prompt: `Palavra chave: Chá,Sabor\nTipo: Loja\nDescrição: Venha experimentar o nosso chá e desfrutar de uma experiência única! Oferecemos uma variedade de chás de qualidade, de sabores e aromas únicos. Venha experimentar e descobrir o seu favorito! Aqui na nossa loja você encontrará tudo para desfrutar de uma experiência única com o chá.\nPalavra chave: ${keywords}\nTipo: ${type}\nDescrição: `,
     temperature: 0.5,
     max_tokens: 2000,
     top_p: 1,
