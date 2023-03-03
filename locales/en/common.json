@@ -29,5 +29,6 @@
   "geradorTexto": "Text generator",
   "numPalavras": "Number of words",
   "urlArtigo": "URL of an article to use as a base",
-  "siteEmpresa": "Company website"
+  "siteEmpresa": "Company website",
+  "aguarde": "Generating text... Please wait"
 }

@@ -29,5 +29,6 @@
   "geradorTexto": "Generador de Texto",
   "numPalavras": "Número de palabras",
   "urlArtigo": "URL de un artículo para usar como base",
-  "siteEmpresa": "Sitio web de la empresa"
+  "siteEmpresa": "Sitio web de la empresa",
+  "aguarde": "Generando texto... Por favor espera"
 }
