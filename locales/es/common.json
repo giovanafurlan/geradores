@@ -1,0 +1,33 @@
+{
+  "geradores": "Geradores",
+
+  "__comment6.2__": "Gerador de Title",
+  "geradorTitle": "Generador de títulos",
+  "geradorTitles": "Generador de Título y Descripción",
+  "palavraChave": "Palabra clave",
+  "tipoConteudo": "Tipo de contenido",
+  "outros": "Otro",
+  "loja": "Tienda",
+  "gerarTitleDescription": "Generar Título y Descripción",
+  "h1": "H1 sugerido",
+  "copiar": "copiar",
+  "copiado": "copiado",
+
+  "__comment6.3__": "Gerador de Anúncios",
+  "geradorAds": "Generador de Anuncios",
+  "nomeEmpresa": "Nombre de la empresa",
+  "audiencia": "Audiencia",
+  "descricaoEmpresa": "Descripción de la empresa",
+  "adicionar": "Agregar",
+  "adicionarPalavraChave": "Palabras clave para agregar",
+  "evitarPalavraChave": "Palabras clave a evitar",
+  "titulo": "Título",
+  "descricao": "Descripción",
+  "gerar": "Generar",
+
+  "__comment6.4__": "Gerador de Texto",
+  "geradorTexto": "Generador de Texto",
+  "numPalavras": "Número de palabras",
+  "urlArtigo": "URL de un artículo para usar como base",
+  "siteEmpresa": "Sitio web de la empresa"
+}
