@@ -40,6 +40,18 @@ const Links = [
     {
         nome: 'Gerador anúncio facebook',
         link: '/geradorFacebook'
+    },
+    {
+        nome: 'Gerador anúncio instagram',
+        link: '/geradorInstagram'
+    },
+    {
+        nome: 'Gerador anúncio linkedin',
+        link: '/geradorLinkedin'
+    },
+    {
+        nome: 'Gerador anúncio youtube',
+        link: '/geradorYoutube'
     }
 ];
 

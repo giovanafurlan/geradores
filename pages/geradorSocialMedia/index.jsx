@@ -50,7 +50,9 @@ export default function GeradorSocialMedia() {
 
     setVisibility('visible');
 
-    getSocialMedia(locale, topic, keywords.toString().toString())
+    var caracteres = 20;
+
+    getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
       .then((res) => {
         // console.log(res);
 
@@ -64,8 +66,6 @@ export default function GeradorSocialMedia() {
           const list = el.split('/');
 
           setResult(list);
-
-          console.log(result);
         })
 
       })
@@ -226,9 +226,9 @@ export default function GeradorSocialMedia() {
                     <Textarea
                       key={item}
                       defaultValue={item}
-                      onChange={handleChange} />
+                      readOnly />
                     <CopyClipboard
-                      copyText={message} />
+                      copyText={item} />
                   </Flex>
                 ))}
               </Flex>

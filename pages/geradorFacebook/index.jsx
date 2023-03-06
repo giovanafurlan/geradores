@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  Avatar,
   Box,
   Button,
   CircularProgress,
@@ -8,6 +9,7 @@ import {
   FormLabel,
   Grid,
   GridItem,
+  Image,
   Input,
   Tag,
   TagCloseButton,
@@ -36,7 +38,6 @@ export default function GeradorFacebook() {
   const [audience, setAudience] = useState();
   const [resume, setResume] = useState();
 
-  const [titles, setTitles] = useState();
   const [title1, setTitle1] = useState();
   const [title2, setTitle2] = useState();
   const [title3, setTitle3] = useState();
@@ -44,7 +45,6 @@ export default function GeradorFacebook() {
   const [title5, setTitle5] = useState();
   const [title6, setTitle6] = useState();
 
-  const [descriptions, setDescriptions] = useState();
   const [description1, setDescription1] = useState();
   const [description2, setDescription2] = useState();
   const [description3, setDescription3] = useState();
@@ -58,6 +58,8 @@ export default function GeradorFacebook() {
   const [name2, setName2] = useState('');
 
   const bg = useColorModeValue('white', 'gray.900');
+  const bg1 = useColorModeValue('gray.100', 'gray.900');
+  const bg2 = useColorModeValue('gray.200', 'gray.800');
   const color = useColorModeValue('primary', 'white');
 
   const route = useRouter();
@@ -528,33 +530,67 @@ export default function GeradorFacebook() {
           visibility={visibility}>
           <Flex
             flexDir={'column'}
-            bg={bg}
+            bg={bg1}
             display={display}
             borderRadius={'30px'}
             p='4'
             gap={'4'}
             alignItems={'initial'}>
-            {isLoadingT
-              ?
-              <CircularProgress
-                isIndeterminate />
-              :
-              <Text
-                color={'blue.400'}
-                fontSize='lg'>
-                {arrayTitles[index]}
-                {/* {title1}/{title2}/{title3}/{title4}/{title5}/{title6} */}
-              </Text>
-            }
             {isLoadingD
               ?
               <CircularProgress
                 isIndeterminate />
               :
-              <Text>
-                {arrayDescriptions[index]}
-                {/* {description1}/{description2}/{description3} */}
-              </Text>
+              <Flex
+                flexDir={'column'}
+                gap='2'>
+                <Flex
+                  align={'center'}
+                  gap='2'>
+                  <Avatar />
+                  <Text>
+                    {company}
+                  </Text>
+                </Flex>
+                <Text>
+                  {arrayDescriptions[index]}
+                  {/* {title1}/{title2}/{title3}/{title4}/{title5}/{title6} */}
+                </Text>
+              </Flex>
+            }
+            {isLoadingT
+              ?
+              <CircularProgress
+                isIndeterminate />
+              :
+              <Flex
+                flexDir={'column'}
+                bg={bg2}
+                gap='2'
+                borderRadius={'lg'}>
+                <Image
+                  w='full'
+                  h='sm'
+                  borderRadius={'lg'}
+                  src='/images/facebook.png' />
+                <Text
+                px='2'
+                  textTransform={'uppercase'}>
+                  {company}.com
+                </Text>
+                <Text
+                px='2'
+                  fontWeight={'bold'}>
+                  {arrayTitles[index]}
+                  {/* {description1}/{description2}/{description3} */}
+                </Text>
+                <Text
+                px='2'
+                pb='2'>
+                  {arrayTitles[index]}
+                  {/* {description1}/{description2}/{description3} */}
+                </Text>
+              </Flex>
             }
             {isLoadingD
               ?

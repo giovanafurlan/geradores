@@ -120,6 +120,7 @@ const getText = async (
 
 const getSocialMedia = async (
   locale,
+  caracteres,
   topic,
   keywords
 ) => {
@@ -127,6 +128,7 @@ const getSocialMedia = async (
     .get("/api/generateSocialMedia", {
       params: {
         locale: locale,
+        caracteres: caracteres,
         topic: topic,
         keywords: keywords
       },
