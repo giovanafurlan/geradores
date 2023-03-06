@@ -28,11 +28,10 @@ export default function GeradorSocialMedia() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
-  const [display, setDisplay] = useState('none');
 
-  const [topic, setTopic] = useState('American tech multinational business ');
+  const [topic, setTopic] = useState();
 
-  const [keywords, setKeywords] = useState(['tech']);
+  const [keywords, setKeywords] = useState([]);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
@@ -221,7 +220,9 @@ export default function GeradorSocialMedia() {
                 gap='4'>
                 {result?.map((item) => (
                   <Flex
-                    key={item}>
+                    key={item}
+                    align='center'
+                    gap='2'>
                     <Textarea
                       key={item}
                       defaultValue={item}
