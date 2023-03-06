@@ -97,7 +97,14 @@ export default function GeradorSocialMedia() {
   const handleClear = () => {
     setId(0);
     setKeywords([]);
-  }
+  } 
+  
+  const [message, setMessage] = useState('');
+
+  const handleChange = (event) => {
+    // 👇 Get input value from "event"
+    setMessage(event.target.value);
+  };
 
   return (
     <Menu>
@@ -213,12 +220,14 @@ export default function GeradorSocialMedia() {
                 flexDir={'column'}
                 gap='4'>
                 {result?.map((item) => (
-                  <Flex>
+                  <Flex
+                    key={item}>
                     <Textarea
                       key={item}
-                      defaultValue={item} />
+                      defaultValue={item}
+                      onChange={handleChange} />
                     <CopyClipboard
-                      copyText={item} />
+                      copyText={message} />
                   </Flex>
                 ))}
               </Flex>
