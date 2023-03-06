@@ -18,6 +18,8 @@ import "quill/dist/quill.snow.css";
 import useTranslation from "next-translate/useTranslation";
 import { getText } from "../../services/getApis";
 import styled from "styled-components";
+import { useRouter } from "next/router";
+import Menu from '../components/Menu';
 
 export const Estilo = styled.div`
   .ql-toolbar.ql-snow, 
@@ -54,13 +56,17 @@ export default function GeradorTextos() {
 
   // const [text, setText] = useState();
   
+  const route = useRouter();
+  
   async function handleSubmit() {
+    
+    const locale = route.locale;
 
     setIsLoading(true);
-
+    
     setVisibility('visible');
 
-    getText(numPalavras, urlArtigo, nomeEmpresa, siteEmpresa)
+    getText(locale, numPalavras, urlArtigo, nomeEmpresa, siteEmpresa)
       .then((res) => {
         setIsLoading(false);
 
@@ -108,6 +114,7 @@ export default function GeradorTextos() {
   ]
 
   return (
+    <Menu>
       <Flex
         flexDir={'column'}
         gap='4'>
@@ -167,14 +174,14 @@ export default function GeradorTextos() {
           {isLoading
             ?
             <Flex
-            gap='4'
-            align={'center'}
-            mb='4'>
+              gap='4'
+              align={'center'}
+              mb='4'>
               <CircularProgress
                 isIndeterminate />
               <Text>
                 {t('aguarde')}
-                </Text>
+              </Text>
             </Flex>
             :
             <></>
@@ -186,6 +193,7 @@ export default function GeradorTextos() {
           </Estilo>
         </Box>
       </Flex>
+    </Menu>
   )
 }
 

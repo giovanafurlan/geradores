@@ -1,6 +1,8 @@
 var axios = require("axios");
 
 export default function handler(req, res) {
+  const locale = req.query.locale;
+
   const keywords = req.query.keywords;
 
   const type = req.query.type || "";
@@ -13,9 +15,19 @@ export default function handler(req, res) {
     return;
   }
 
+  var prompt = "";
+
+  if (locale == "en") {
+    prompt = `Keyword: Tea,Flavor\nType: Shop\nDescription: Come try our tea and enjoy a unique experience! We offer a variety of quality teas, with unique flavors and aromas. Come try and discover your favorite! Here in our store you will find everything to enjoy a unique tea experience.\nKeyword: ${keywords}\nType: ${type}\nDescription:`;
+  } else if (locale == "es") {
+    prompt = `Palabra clave: Té,Sabor\nTipo: Tienda\nDescripción: ¡Ven a probar nuestro té y disfruta de una experiencia única! Ofrecemos una variedad de tés de calidad, con sabores y aromas únicos. ¡Ven a probar y descubre tu favorito! Aquí en nuestra tienda encontrarás todo para disfrutar de una experiencia de té única.\nPalabra clave: ${keywords}\nTipo: ${type}\nDescripción:`;
+  } else {
+    prompt = `Palavra chave: Chá,Sabor\nTipo: Loja\nDescrição: Venha experimentar o nosso chá e desfrutar de uma experiência única! Oferecemos uma variedade de chás de qualidade, de sabores e aromas únicos. Venha experimentar e descobrir o seu favorito! Aqui na nossa loja você encontrará tudo para desfrutar de uma experiência única com o chá.\nPalavra chave: ${keywords}\nTipo: ${type}\nDescrição: `;
+  }
+
   var data = JSON.stringify({
     model: "text-davinci-003",
-    prompt: `Palavra chave: Chá,Sabor\nTipo: Loja\nDescrição: Venha experimentar o nosso chá e desfrutar de uma experiência única! Oferecemos uma variedade de chás de qualidade, de sabores e aromas únicos. Venha experimentar e descobrir o seu favorito! Aqui na nossa loja você encontrará tudo para desfrutar de uma experiência única com o chá.\nPalavra chave: ${keywords}\nTipo: ${type}\nDescrição: `,
+    prompt: prompt,
     temperature: 0.5,
     max_tokens: 2000,
     top_p: 1,

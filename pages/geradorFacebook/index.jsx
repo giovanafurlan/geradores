@@ -22,7 +22,7 @@ import CopyClipboard from "../components/CopyClipboard";
 import Menu from '../components/Menu';
 import { useRouter } from "next/router";
 
-export default function GeradorAds() {
+export default function GeradorFacebook() {
 
   const { t } = useTranslation("common");
 

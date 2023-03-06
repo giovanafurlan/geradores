@@ -1,4 +1,6 @@
 {
+  "language-name": "🇺🇸 English",
+  
   "geradores": "Geradores",
 
   "__comment6.2__": "Gerador de Title",
@@ -24,11 +26,16 @@
   "titulo": "Title",
   "descricao": "Description",
   "gerar": "Generate",
+  "limpar": "Clear",
+  "salvar": "Save",
 
   "__comment6.4__": "Gerador de Texto",
   "geradorTexto": "Text generator",
   "numPalavras": "Number of words",
   "urlArtigo": "URL of an article to use as a base",
   "siteEmpresa": "Company website",
-  "aguarde": "Generating text... Please wait"
+  "aguarde": "Generating text... Please wait",
+
+  "__comment6.5__": "Gerador de Mídias Sociais",
+  "topico": "Topic"
 }

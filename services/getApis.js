@@ -1,9 +1,23 @@
 import axios from "axios";
 
-const getDescriptionsAds = async (company, resume, audience, keywords, avoidKeywords) => {
+const getDescriptionsAds = async (
+  locale,
+  company,
+  resume,
+  audience,
+  keywords,
+  avoidKeywords
+) => {
   return axios
     .get("/api/adsDescriptions", {
-      params: { company: company, resume: resume, audience: audience, keywords: keywords, avoidKeywords: avoidKeywords },
+      params: {
+        locale: locale,
+        company: company,
+        resume: resume,
+        audience: audience,
+        keywords: keywords,
+        avoidKeywords: avoidKeywords,
+      },
     })
     .then((e) => {
       return e.data;
@@ -14,10 +28,24 @@ const getDescriptionsAds = async (company, resume, audience, keywords, avoidKeyw
     });
 };
 
-const getTitlesAds = async (company, resume, audience, keywords, avoidKeywords) => {
+const getTitlesAds = async (
+  locale,
+  company,
+  resume,
+  audience,
+  keywords,
+  avoidKeywords
+) => {
   return axios
     .get("/api/adsTitles", {
-      params: { company: company, resume: resume, audience: audience, keywords: keywords, avoidKeywords: avoidKeywords },
+      params: {
+        locale: locale,
+        company: company,
+        resume: resume,
+        audience: audience,
+        keywords: keywords,
+        avoidKeywords: avoidKeywords,
+      },
     })
     .then((e) => {
       return e.data;
@@ -28,10 +56,14 @@ const getTitlesAds = async (company, resume, audience, keywords, avoidKeywords) 
     });
 };
 
-const getTitle = async (keywords, type) => {
+const getTitle = async (locale, keywords, type) => {
   return axios
     .get("/api/generateTitle", {
-      params: { keywords: keywords, type: type },
+      params: {
+        locale: locale,
+        keywords: keywords,
+        type: type,
+      },
     })
     .then((e) => {
       return e.data;
@@ -42,10 +74,14 @@ const getTitle = async (keywords, type) => {
     });
 };
 
-const getDescription = async (keywords, type) => {
+const getDescription = async (locale, keywords, type) => {
   return axios
     .get("/api/generateDescription", {
-      params: { keywords: keywords, type: type },
+      params: {
+        locale: locale,
+        keywords: keywords,
+        type: type,
+      },
     })
     .then((e) => {
       return e.data;
@@ -56,10 +92,22 @@ const getDescription = async (keywords, type) => {
     });
 };
 
-const getText= async (numPalavras, urlArtigo, nomeEmpresa, siteEmpresa) => {
+const getText = async (
+  locale,
+  numPalavras,
+  urlArtigo,
+  nomeEmpresa,
+  siteEmpresa
+) => {
   return axios
     .get("/api/generateText", {
-      params: { numPalavras: numPalavras, urlArtigo: urlArtigo, nomeEmpresa: nomeEmpresa, siteEmpresa: siteEmpresa },
+      params: {
+        locale: locale,
+        numPalavras: numPalavras,
+        urlArtigo: urlArtigo,
+        nomeEmpresa: nomeEmpresa,
+        siteEmpresa: siteEmpresa,
+      },
     })
     .then((e) => {
       return e.data;
@@ -69,10 +117,34 @@ const getText= async (numPalavras, urlArtigo, nomeEmpresa, siteEmpresa) => {
       return;
     });
 };
+
+const getSocialMedia = async (
+  locale,
+  topic,
+  keywords
+) => {
+  return axios
+    .get("/api/generateSocialMedia", {
+      params: {
+        locale: locale,
+        topic: topic,
+        keywords: keywords
+      },
+    })
+    .then((e) => {
+      return e.data;
+    })
+    .catch((e) => {
+      // console.log(e);
+      return;
+    });
+};
+
 
 export { 
   getTitlesAds, 
   getDescriptionsAds, 
   getDescription, 
   getTitle, 
-  getText };
+  getText,
+  getSocialMedia };

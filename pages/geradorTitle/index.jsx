@@ -22,6 +22,8 @@ import useTranslation from "next-translate/useTranslation";
 import { IoMdCode } from "react-icons/io";
 import { getDescription, getTitle } from "../../services/getApis";
 import CopyClipboard from "../components/CopyClipboard";
+import Menu from '../components/Menu';
+import { useRouter } from "next/router";
 
 export default function GeradorTitle() {
 
@@ -43,6 +45,8 @@ export default function GeradorTitle() {
   const color = useColorModeValue('primary', 'white');
   const border = useColorModeValue("primary", "white");
 
+  const route = useRouter();
+
   async function handleSubmit() {
 
     setIsLoadingT(true);
@@ -50,7 +54,9 @@ export default function GeradorTitle() {
 
     setVisibility('visible');
 
-    getTitle(keywords.toString(), type)
+    const locale = route.locale;
+
+    getTitle(locale, keywords.toString(), type)
       .then((res) => {
         setIsLoadingT(false);
 
@@ -73,7 +79,7 @@ export default function GeradorTitle() {
       })
       .finally();
 
-    getDescription(keywords.toString(), type)
+    getDescription(locale, keywords.toString(), type)
       .then((res) => {
         setIsLoadingD(false);
 
@@ -142,173 +148,175 @@ export default function GeradorTitle() {
   }
 
   return (
-    <Grid
-      templateColumns={'repeat(3,1fr)'}
-      gap='6'>
-      <GridItem>
-        <Flex
-          flexDir={'column'}
-          gap='4'>
-          <FormControl
-            isRequired>
-            <FormLabel>
-              {t('tipoConteudo')}
-            </FormLabel>
-            <Select
-              id="select-tipo"
-              name="tipo"
-              onChange={(e) => setType(e.target.value)}
-              bg={bg}
-              borderRadius={"30px"} >
-              <option value="">
-              </option>
-              <option value="Loja">
-                {t('loja')}
-              </option>
-              <option value="Blog">
-                Blog
-              </option>
-              <option value="Institucional">
-                Institucional
-              </option>
-              <option value="Outros">
-                {t('outros')}
-              </option>
-            </Select>
-          </FormControl>
-          <FormControl
-            isRequired>
-            <FormLabel>
-              {t('palavraChave')}
-            </FormLabel>
-            <Flex
-              align={'center'}
-              gap='2'>
-              <Input
-                isRequired={true}
+    <Menu>
+      <Grid
+        templateColumns={'repeat(3,1fr)'}
+        gap='6'>
+        <GridItem>
+          <Flex
+            flexDir={'column'}
+            gap='4'>
+            <FormControl
+              isRequired>
+              <FormLabel>
+                {t('tipoConteudo')}
+              </FormLabel>
+              <Select
+                id="select-tipo"
+                name="tipo"
+                onChange={(e) => setType(e.target.value)}
                 bg={bg}
-                value={name}
-                borderRadius={"30px"}
-                onKeyPress={handleKeypress}
-                onChange={(e) => setName(e.target.value)} />
-              <Button
-                onClick={handleAddClick}
-                variant='button'>
-                Add item
-              </Button>
-              <Button
-                onClick={handleClear}
-                variant='button-outline'
-                color={color}
-                borderColor={color}>
-                Clear list
-              </Button>
-            </Flex>
-          </FormControl>
-          <div>
-            {keywords.map((item) => {
-              const handleRemoveClick = () => {
-                setKeyword(list => list.filter((entry) => entry !== item));
-              };
-              return (
-                <Tag
-                  key={item}
-                  borderRadius='full'
-                  variant='solid'
-                  colorScheme='purple'
-                  mr='2'
-                  mb='2'>
-                  <TagLabel>
-                    {item}
-                  </TagLabel>
-                  <TagCloseButton
-                    onClick={handleRemoveClick} />
-                </Tag>
-              )
-            })}
-          </div>
-          <Box
-            w='full'>
-            <Button
-              onClick={() => { handleSubmit() }}
-              variant="button-orange"
-              _hover={{
-                bg: "#FFB596",
-              }} >
-              {t('gerarTitleDescription')}
-            </Button>
-          </Box>
-        </Flex>
-      </GridItem>
-      <GridItem
-        colSpan={'2'}>
-        <Flex
-          visibility={visibility}
-          className="Fields"
-          flexDir={"column"}
-          gap="4">
-          {isLoadingT
-            ?
-            <CircularProgress
-              isIndeterminate />
-            :
-            <>
-              <Field
-                id={"h1-textarea"}
-                titulo={'H1'}
-                value={h1}
-                copyText={h1}
-                copyHTML={copyHTMLH1} />
-              <Field
-                id={"title-textarea"}
-                titulo={"Title"}
-                value={title}
-                copyText={title}
-                copyHTML={copyHTMLTitle} />
-            </>
-          }
-          {isLoadingD
-            ?
-            <CircularProgress
-              isIndeterminate />
-            :
-            <>
+                borderRadius={"30px"} >
+                <option value="">
+                </option>
+                <option value="Loja">
+                  {t('loja')}
+                </option>
+                <option value="Blog">
+                  Blog
+                </option>
+                <option value="Institucional">
+                  Institucional
+                </option>
+                <option value="Outros">
+                  {t('outros')}
+                </option>
+              </Select>
+            </FormControl>
+            <FormControl
+              isRequired>
+              <FormLabel>
+                {t('palavraChave')}
+              </FormLabel>
               <Flex
-                justifyContent={"space-between"}
-                align="center">
-                <Text>
-                  {t('descricao')}
-                </Text>
-                <ButtonGroup spacing="5">
-                  <CopyClipboard
-                    pos={'absolute'}
-                    copyText={description} />
-                  <Button
-                    onClick={copyHTMLDescription}
-                    variant={"button-outline"}
-                    borderColor={border}
-                    color={border}>
-                    <Flex
-                      gap="2"
-                      align={"center"}>
-                      <IoMdCode />
-                      HTML
-                    </Flex>
-                  </Button>
-                </ButtonGroup>
+                align={'center'}
+                gap='2'>
+                <Input
+                  isRequired={true}
+                  bg={bg}
+                  value={name}
+                  borderRadius={"30px"}
+                  onKeyPress={handleKeypress}
+                  onChange={(e) => setName(e.target.value)} />
+                <Button
+                  onClick={handleAddClick}
+                  variant='button'>
+                  Add item
+                </Button>
+                <Button
+                  onClick={handleClear}
+                  variant='button-outline'
+                  color={color}
+                  borderColor={color}>
+                  Clear list
+                </Button>
               </Flex>
-              <Textarea
-                id={"description-textarea"}
-                bg={bg}
-                rows='8'
-                readOnly
-                borderRadius={"30px"}
-                value={description || ''} />
-            </>
-          }
-        </Flex>
-      </GridItem>
-    </Grid>
+            </FormControl>
+            <div>
+              {keywords.map((item) => {
+                const handleRemoveClick = () => {
+                  setKeyword(list => list.filter((entry) => entry !== item));
+                };
+                return (
+                  <Tag
+                    key={item}
+                    borderRadius='full'
+                    variant='solid'
+                    colorScheme='purple'
+                    mr='2'
+                    mb='2'>
+                    <TagLabel>
+                      {item}
+                    </TagLabel>
+                    <TagCloseButton
+                      onClick={handleRemoveClick} />
+                  </Tag>
+                )
+              })}
+            </div>
+            <Box
+              w='full'>
+              <Button
+                onClick={() => { handleSubmit() }}
+                variant="button-orange"
+                _hover={{
+                  bg: "#FFB596",
+                }} >
+                {t('gerarTitleDescription')}
+              </Button>
+            </Box>
+          </Flex>
+        </GridItem>
+        <GridItem
+          colSpan={'2'}>
+          <Flex
+            visibility={visibility}
+            className="Fields"
+            flexDir={"column"}
+            gap="4">
+            {isLoadingT
+              ?
+              <CircularProgress
+                isIndeterminate />
+              :
+              <>
+                <Field
+                  id={"h1-textarea"}
+                  titulo={'H1'}
+                  value={h1}
+                  copyText={h1}
+                  copyHTML={copyHTMLH1} />
+                <Field
+                  id={"title-textarea"}
+                  titulo={"Title"}
+                  value={title}
+                  copyText={title}
+                  copyHTML={copyHTMLTitle} />
+              </>
+            }
+            {isLoadingD
+              ?
+              <CircularProgress
+                isIndeterminate />
+              :
+              <>
+                <Flex
+                  justifyContent={"space-between"}
+                  align="center">
+                  <Text>
+                    {t('descricao')}
+                  </Text>
+                  <ButtonGroup spacing="5">
+                    <CopyClipboard
+                      pos={'absolute'}
+                      copyText={description} />
+                    <Button
+                      onClick={copyHTMLDescription}
+                      variant={"button-outline"}
+                      borderColor={border}
+                      color={border}>
+                      <Flex
+                        gap="2"
+                        align={"center"}>
+                        <IoMdCode />
+                        HTML
+                      </Flex>
+                    </Button>
+                  </ButtonGroup>
+                </Flex>
+                <Textarea
+                  id={"description-textarea"}
+                  bg={bg}
+                  rows='8'
+                  readOnly
+                  borderRadius={"30px"}
+                  value={description || ''} />
+              </>
+            }
+          </Flex>
+        </GridItem>
+      </Grid>
+    </Menu>
   )
 }
 

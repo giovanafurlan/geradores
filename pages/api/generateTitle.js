@@ -1,6 +1,8 @@
 var axios = require("axios");
 
 export default function handler(req, res) {
+  const locale = req.query.locale;
+
   const keywords = req.query.keywords;
 
   const type = req.query.type || "";
@@ -13,9 +15,19 @@ export default function handler(req, res) {
     return;
   }
 
+  var prompt = "";
+
+  if (locale == "en") {
+    prompt = `Keyword: Tea,Flavor\nType: Store\nTitle: Try Tea and Enjoy a Unique Experience!\nKeyword: ${keywords}\nType: ${type}\nTitle:`;
+  } else if (locale == "es") {
+    prompt = `Palabra clave: Té,Sabor\nTipo: Tienda\nTítulo: ¡Prueba el té y disfruta de una experiencia única!\nPalabra clave: ${keywords}\nTipo: ${type}\nTítulo:`;
+  } else {
+    prompt = `Palavra chave: Chá,Sabor\nTipo: Loja\nTítulo: Experimente o Chá e Desfrute de Uma Experiência Única!\nPalavra chave: ${keywords}\nTipo: ${type}\nTítulo: `;
+  }
+
   var data = JSON.stringify({
     model: "text-davinci-003",
-    prompt: `Palavra chave: Chá,Sabor\nTipo: Loja\nTítulo: Experimente o Chá e Desfrute de Uma Experiência Única!\nPalavra chave: ${keywords}\nTipo: ${type}\nTítulo: `,
+    prompt: prompt,
     temperature: 0.5,
     max_tokens: 2000,
     top_p: 1,
