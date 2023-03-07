@@ -14,7 +14,6 @@ import {
   TagCloseButton,
   TagLabel,
   Text,
-  Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
@@ -33,26 +32,27 @@ export default function GeradorProduto() {
   const [display, setDisplay] = useState('inline-flex');
   const [display2, setDisplay2] = useState('none');
 
-  const [company, setCompany] = useState();
-  const [product, setProduct] = useState();
+  const [company, setCompany] = useState('Apple');
+  const [product, setProduct] = useState('Iphone 14 plus');
   const [tom, setTom] = useState();
 
   const [title1, setTitle1] = useState();
   const [title2, setTitle2] = useState();
   const [title3, setTitle3] = useState();
-  // const [title4, setTitle4] = useState();
-  // const [title5, setTitle5] = useState();
-  // const [title6, setTitle6] = useState();
+  const [title4, setTitle4] = useState();
+  const [title5, setTitle5] = useState();
 
   const [description1, setDescription1] = useState();
   const [description2, setDescription2] = useState();
   const [description3, setDescription3] = useState();
+  const [description4, setDescription4] = useState();
+  const [description5, setDescription5] = useState();
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywords, setKeywords] = useState(['smartphone', 'iphone']);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
-  const [productDescription, setProductDescription] = useState([]);
+  const [productDescription, setProductDescription] = useState(['256gb', 'dourado']);
   const [id2, setId2] = useState(1);
   const [name2, setName2] = useState('');
 
@@ -70,7 +70,7 @@ export default function GeradorProduto() {
 
     setVisibility('visible');
 
-    getTitlesProduct(locale, company, product, keywords.toString(), productDescription.toString(),tom)
+    getTitlesProduct(locale, company, product, keywords.toString(), productDescription.toString(), tom)
       .then((res) => {
         setIsLoadingT(false);
 
@@ -85,9 +85,8 @@ export default function GeradorProduto() {
           setTitle1(titles[0]);
           setTitle2(titles[1]);
           setTitle3(titles[2]);
-          // setTitle4(titles[3]);
-          // setTitle5(titles[4]);
-          // setTitle6(titles[5]);
+          setTitle4(titles[3]);
+          setTitle5(titles[4]);
         })
 
       })
@@ -98,7 +97,7 @@ export default function GeradorProduto() {
       })
       .finally();
 
-    getDescriptionsProduct(locale, company, product, keywords.toString(), productDescription.toString(),tom)
+    getDescriptionsProduct(locale, company, product, keywords.toString(), productDescription.toString(), tom)
       .then((res) => {
         setIsLoadingD(false);
 
@@ -113,6 +112,8 @@ export default function GeradorProduto() {
           setDescription1(descriptions[0]);
           setDescription2(descriptions[1]);
           setDescription3(descriptions[2]);
+          setDescription4(descriptions[3]);
+          setDescription5(descriptions[4]);
         })
 
       })
@@ -253,27 +254,20 @@ export default function GeradorProduto() {
       onChange: (e) => setTitle3(e.target.value),
       colSpan: 1
     },
-    // {
-    //   id: 'title4',
-    //   title: `${t('titulo')} 4`,
-    //   value: title4 || '',
-    //   onChange: (e) => setTitle4(e.target.value),
-    //   colSpan: 1
-    // },
-    // {
-    //   id: 'title5',
-    //   title: `${t('titulo')} 5`,
-    //   value: title5 || '',
-    //   onChange: (e) => setTitle5(e.target.value),
-    //   colSpan: 1
-    // },
-    // {
-    //   id: 'title6',
-    //   title: `${t('titulo')} 6`,
-    //   value: title6 || '',
-    //   onChange: (e) => setTitle6(e.target.value),
-    //   colSpan: 1
-    // },
+    {
+      id: 'title4',
+      title: `${t('titulo')} 4`,
+      value: title4 || '',
+      onChange: (e) => setTitle4(e.target.value),
+      colSpan: 1
+    },
+    {
+      id: 'title5',
+      title: `${t('titulo')} 5`,
+      value: title5 || '',
+      onChange: (e) => setTitle5(e.target.value),
+      colSpan: 1
+    },
     {
       id: 'description1',
       title: `${t('descricao')} 1`,
@@ -294,66 +288,86 @@ export default function GeradorProduto() {
       value: description3 || '',
       onChange: (e) => setDescription3(e.target.value),
       colSpan: 2
+    },
+    {
+      id: 'description4',
+      title: `${t('descricao')} 4`,
+      value: description4 || '',
+      onChange: (e) => setDescription4(e.target.value),
+      colSpan: 2
+    },
+    {
+      id: 'description5',
+      title: `${t('descricao')} 5`,
+      value: description5 || '',
+      onChange: (e) => setDescription5(e.target.value),
+      colSpan: 2
     }
   ]
 
   const itemsHeadlines = [
     {
-      color: title1?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+      color: title1?.replace(/\s/g, '').length > 120 ? 'red' : 'green',
       title: `${t('titulo')} 1:`,
       total: title1?.replace(/\s/g, '').length,
-      cont: 30
+      cont: 120
     },
     {
-      color: title2?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+      color: title2?.replace(/\s/g, '').length > 120 ? 'red' : 'green',
       title: `${t('titulo')} 2:`,
       total: title2?.replace(/\s/g, '').length,
+      cont: 120
+    },
+    {
+      color: title3?.replace(/\s/g, '').length > 120 ? 'red' : 'green',
+      title: `${t('titulo')} 3:`,
+      total: title3?.replace(/\s/g, '').length,
+      cont: 120
+    },
+    {
+      color: title4?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+      title: `${t('titulo')} 4:`,
+      total: title4?.replace(/\s/g, '').length,
       cont: 30
     },
     {
-      color: title3?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-      title: `${t('titulo')} 3:`,
-      total: title3?.replace(/\s/g, '').length,
+      color: title5?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+      title: `${t('titulo')} 5:`,
+      total: title5?.replace(/\s/g, '').length,
       cont: 30
     }
-    // {
-    //   color: title4?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-    //   title: `${t('titulo')} 4:`,
-    //   total: title4?.replace(/\s/g, '').length,
-    //   cont: 30
-    // },
-    // {
-    //   color: title5?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-    //   title: `${t('titulo')} 5:`,
-    //   total: title5?.replace(/\s/g, '').length,
-    //   cont: 30
-    // },
-    // {
-    //   color: title6?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-    //   title: `${t('titulo')} 6:`,
-    //   total: title6?.replace(/\s/g, '').length,
-    //   cont: 30
-    // }
   ]
 
   const itemsDescriptions = [
     {
-      color: description1?.replace(/\s/g, '').length > 90 ? 'red' : 'green',
+      color: description1?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
       title: `${t('descricao')} 1:`,
       total: description1?.replace(/\s/g, '').length,
-      cont: 90
+      cont: 250
     },
     {
-      color: description2?.replace(/\s/g, '').length > 90 ? 'red' : 'green',
+      color: description2?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
       title: `${t('descricao')} 2:`,
       total: description2?.replace(/\s/g, '').length,
-      cont: 90
+      cont: 250
     },
     {
-      color: description3?.replace(/\s/g, '').length > 90 ? 'red' : 'green',
+      color: description3?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
       title: `${t('descricao')} 3:`,
       total: description3?.replace(/\s/g, '').length,
-      cont: 90
+      cont: 250
+    },
+    {
+      color: description4?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
+      title: `${t('descricao')} 3:`,
+      total: description4?.replace(/\s/g, '').length,
+      cont: 250
+    },
+    {
+      color: description5?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
+      title: `${t('descricao')} 3:`,
+      total: description5?.replace(/\s/g, '').length,
+      cont: 250
     }
   ]
 
@@ -513,9 +527,8 @@ export default function GeradorProduto() {
                 <Select
                   borderRadius={'30px'}
                   bg={bg}
-                  onChange={(e)=>setTom(e.target.value)}>
+                  onChange={(e) => setTom(e.target.value)}>
                   <option value="">
-
                   </option>
                   <option
                     value="positivo">
@@ -545,47 +558,59 @@ export default function GeradorProduto() {
         <GridItem
           colSpan={'2'}
           visibility={visibility}>
-          <Flex
-            flexDir={'column'}
-            bg={bg}
-            display={display}
-            borderRadius={'30px'}
-            p='4'
-            gap={'4'}
-            alignItems={'initial'}>
-            {isLoadingT
-              ?
-              <CircularProgress
-                isIndeterminate />
-              :
-              <Text
-                fontWeight={'bold'}
-                fontSize='lg'>
-                {arrayTitles[index]}
-                {/* {title1}/{title2}/{title3}/{title4}/{title5}/{title6} */}
-              </Text>
-            }
-            {isLoadingD
-              ?
-              <CircularProgress
-                isIndeterminate />
-              :
-              <Text>
-                {arrayDescriptions[index]}
-                {/* {description1}/{description2}/{description3} */}
-              </Text>
-            }
-            {isLoadingD
-              ?
-              <CircularProgress
-                isIndeterminate />
-              :
-              <>
+          <Box
+            w='100%'
+            mb='4'>
+            <Button
+              onClick={handleEdit}
+              bg='none'
+              border='1px'
+              borderRadius={'30px'}
+              borderColor={color}
+              display={display}
+              w='min-content'
+              px='2'
+              color={color}
+              fontWeight='normal'>
+              Visualizar títulos e descrições
+            </Button>
+          </Box>
+          {isLoadingT
+            ?
+            <CircularProgress
+              isIndeterminate />
+            :
+            <Flex
+              flexDir={'column'}
+              gap='4'>
+              <Flex
+                flexDir={'column'}
+                bg={bg}
+                display={display}
+                borderRadius={'30px'}
+                p='4'
+                gap={'4'}
+                alignItems={'initial'}>
+                <Text
+                  fontWeight={'bold'}
+                  fontSize='lg'>
+                  {/* {arrayTitles[index]} */}
+                  {title1}
+                </Text>
+                {isLoadingD
+                  ?
+                  <CircularProgress
+                    isIndeterminate />
+                  :
+                  <Text>
+                    {/* {arrayDescriptions[index]} */}
+                    {description1}
+                  </Text>
+                }
                 <Flex
                   gap='2'
-                  display={display}
-                  flexWrap='wrap'>
-                  {itemsHeadlines.map((item, idx) => (
+                  display={display}>
+                  {itemsHeadlines.slice(0, 1).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
@@ -597,7 +622,7 @@ export default function GeradorProduto() {
                 <Flex
                   gap='2'
                   display={display}>
-                  {itemsDescriptions.map((item, idx) => (
+                  {itemsDescriptions.slice(0, 1).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
@@ -606,25 +631,205 @@ export default function GeradorProduto() {
                       cont={item.cont} />
                   ))}
                 </Flex>
-              </>
-            }
-            <Box
-              w='100%'>
-              <Button
-                onClick={handleEdit}
-                bg='none'
-                border='1px'
-                borderRadius={'30px'}
-                borderColor={color}
+              </Flex>
+              <Flex
+                flexDir={'column'}
+                bg={bg}
                 display={display}
-                w='min-content'
-                px='2'
-                color={color}
-                fontWeight='normal'>
-                Visualizar títulos e descrições
-              </Button>
-            </Box>
-          </Flex>
+                borderRadius={'30px'}
+                p='4'
+                gap={'4'}
+                alignItems={'initial'}>
+                <Text
+                  fontWeight={'bold'}
+                  fontSize='lg'>
+                  {/* {arrayTitles[index]} */}
+                  {title2}
+                </Text>
+                {isLoadingD
+                  ?
+                  <CircularProgress
+                    isIndeterminate />
+                  :
+                  <Text>
+                    {/* {arrayDescriptions[index]} */}
+                    {description2}
+                  </Text>
+                }
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsHeadlines.slice(1, 2).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsDescriptions.slice(1, 2).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+              </Flex>
+              <Flex
+                flexDir={'column'}
+                bg={bg}
+                display={display}
+                borderRadius={'30px'}
+                p='4'
+                gap={'4'}
+                alignItems={'initial'}>
+                <Text
+                  fontWeight={'bold'}
+                  fontSize='lg'>
+                  {/* {arrayTitles[index]} */}
+                  {title3}
+                </Text>
+                {isLoadingD
+                  ?
+                  <CircularProgress
+                    isIndeterminate />
+                  :
+                  <Text>
+                    {/* {arrayDescriptions[index]} */}
+                    {description3}
+                  </Text>
+                }
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+              </Flex>
+              <Flex
+                flexDir={'column'}
+                bg={bg}
+                display={display}
+                borderRadius={'30px'}
+                p='4'
+                gap={'4'}
+                alignItems={'initial'}>
+                <Text
+                  fontWeight={'bold'}
+                  fontSize='lg'>
+                  {/* {arrayTitles[index]} */}
+                  {title4}
+                </Text>
+                {isLoadingD
+                  ?
+                  <CircularProgress
+                    isIndeterminate />
+                  :
+                  <Text>
+                    {/* {arrayDescriptions[index]} */}
+                    {description4}
+                  </Text>
+                }
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+              </Flex>
+              <Flex
+                flexDir={'column'}
+                bg={bg}
+                display={display}
+                borderRadius={'30px'}
+                p='4'
+                gap={'4'}
+                alignItems={'initial'}>
+                <Text
+                  fontWeight={'bold'}
+                  fontSize='lg'>
+                  {/* {arrayTitles[index]} */}
+                  {title5}
+                </Text>
+                {isLoadingD
+                  ?
+                  <CircularProgress
+                    isIndeterminate />
+                  :
+                  <Text>
+                    {/* {arrayDescriptions[index]} */}
+                    {description5}
+                  </Text>
+                }
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+                <Flex
+                  gap='2'
+                  display={display}>
+                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
+                    <Item
+                      key={idx}
+                      color={item.color}
+                      title={item.title}
+                      total={item.total}
+                      cont={item.cont} />
+                  ))}
+                </Flex>
+              </Flex>
+            </Flex>
+          }
           <Box
             display={display2}
             w='100%'>

@@ -1,16 +1,8 @@
 import {
     Box,
     Flex,
-    Avatar,
     HStack,
-    Link,
     IconButton,
-    Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
     useDisclosure,
     useColorModeValue,
     Stack,
@@ -19,6 +11,7 @@ import {
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
 import Language from './Language';
+import Link from 'next/link';
 
 const Links = [
     {
@@ -98,9 +91,6 @@ export default function Simple({ children }) {
                             {Links.map((link) => (
                                 <Link
                                     key={link.link}
-                                    px={2}
-                                    py={1}
-                                    rounded={'md'}
                                     href={link.link}>
                                     {link.nome}
                                 </Link>

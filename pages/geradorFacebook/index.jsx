@@ -127,7 +127,7 @@ export default function GeradorFacebook() {
       .finally();
   }
 
-  const arrayTitles = [`${title1}/${title2}`, `${title3}/${title4}`, `${title5}/${title6}`];
+  const arrayTitles = [`${title1}`, `${title2}`, `${title3}`];
   const arrayDescriptions = [`${description1}`, `${description2}`, `${description3}`];
 
   const [index, setIndex] = useState(0);
