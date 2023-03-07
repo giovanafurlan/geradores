@@ -32,8 +32,8 @@ export default function GeradorProduto() {
   const [display, setDisplay] = useState('inline-flex');
   const [display2, setDisplay2] = useState('none');
 
-  const [company, setCompany] = useState('Apple');
-  const [product, setProduct] = useState('Iphone 14 plus');
+  const [company, setCompany] = useState();
+  const [product, setProduct] = useState();
   const [tom, setTom] = useState();
 
   const [title1, setTitle1] = useState();
@@ -48,11 +48,11 @@ export default function GeradorProduto() {
   const [description4, setDescription4] = useState();
   const [description5, setDescription5] = useState();
 
-  const [keywords, setKeywords] = useState(['smartphone', 'iphone']);
+  const [keywords, setKeywords] = useState([]);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
-  const [productDescription, setProductDescription] = useState(['256gb', 'dourado']);
+  const [productDescription, setProductDescription] = useState([]);
   const [id2, setId2] = useState(1);
   const [name2, setName2] = useState('');
 
