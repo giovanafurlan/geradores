@@ -642,7 +642,7 @@ export default function GeradorProduto() {
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
-                  fontSize='lg'>
+                  fontSize='2xl'>
                   {/* {arrayTitles[index]} */}
                   {title2}
                 </Text>
@@ -691,7 +691,7 @@ export default function GeradorProduto() {
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
-                  fontSize='lg'>
+                  fontSize='2xl'>
                   {/* {arrayTitles[index]} */}
                   {title3}
                 </Text>
@@ -740,7 +740,7 @@ export default function GeradorProduto() {
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
-                  fontSize='lg'>
+                  fontSize='2xl'>
                   {/* {arrayTitles[index]} */}
                   {title4}
                 </Text>
@@ -789,7 +789,7 @@ export default function GeradorProduto() {
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
-                  fontSize='lg'>
+                  fontSize='2xl'>
                   {/* {arrayTitles[index]} */}
                   {title5}
                 </Text>
