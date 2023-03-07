@@ -75,13 +75,10 @@ export default function GeradorFacebook() {
 
     getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
       .then((res) => {
-        // console.log(res);
-
         setIsLoadingT(false);
 
         const data = res;
-
-        // console.log(data);
+        console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;
@@ -106,13 +103,10 @@ export default function GeradorFacebook() {
 
     getDescriptionsAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
       .then((res) => {
-        // console.log(res);
-
         setIsLoadingD(false);
 
         const data = res;
-
-        // console.log(data);
+        console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;

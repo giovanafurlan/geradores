@@ -37,5 +37,9 @@
   "aguarde": "Generating text... Please wait",
 
   "__comment6.5__": "Gerador de Mídias Sociais",
-  "topico": "Topic"
+  "topico": "Topic",
+
+  "__comment6.6__": "Gerador de Descrição de Produtos",
+  "nomeProduto": "Product name",
+  "caracteristicasProduto": "Product features"
 }

@@ -61,8 +61,7 @@ export default function GeradorTitle() {
         setIsLoadingT(false);
 
         const data = res;
-
-        // console.log(data);
+        console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;
@@ -84,8 +83,7 @@ export default function GeradorTitle() {
         setIsLoadingD(false);
 
         const data = res;
-
-        // console.log(data);
+        console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;

@@ -48,6 +48,7 @@ export default function GeradorTextos() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
+  const [visibility2, setVisibility2] = useState('hidden');
 
   const [numPalavras, setNumPalavras] = useState();
   const [urlArtigo, setUrlArtigo] = useState('https://webpeak.netlify.app/blogs/a-webpeak-e-a-ferramenta-mais-completa-de-marketing-digital-do-mercado');
@@ -55,20 +56,21 @@ export default function GeradorTextos() {
   const [siteEmpresa, setSiteEmpresa] = useState('https://www.webpeak.com.br');
 
   // const [text, setText] = useState();
-  
+
   const route = useRouter();
-  
+
   async function handleSubmit() {
-    
+
     const locale = route.locale;
 
     setIsLoading(true);
-    
+
     setVisibility('visible');
 
     getText(locale, numPalavras, urlArtigo, nomeEmpresa, siteEmpresa)
       .then((res) => {
         setIsLoading(false);
+        setVisibility2('visible');
 
         const data = res;
 
@@ -188,6 +190,7 @@ export default function GeradorTextos() {
           }
           <Estilo>
             <Box
+              visibility={visibility2}
               ref={quillRef}
               h={"96"} />
           </Estilo>

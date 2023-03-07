@@ -9,6 +9,7 @@ import {
   Grid,
   GridItem,
   Input,
+  Select,
   Tag,
   TagCloseButton,
   TagLabel,
@@ -17,12 +18,12 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import { getDescriptionsAds, getTitlesAds } from "../../services/getApis";
+import { getDescriptionsProduct, getTitlesProduct } from "../../services/getApis";
 import CopyClipboard from "../components/CopyClipboard";
 import Menu from '../components/Menu';
 import { useRouter } from "next/router";
 
-export default function GeradorAds() {
+export default function GeradorProduto() {
 
   const { t } = useTranslation("common");
 
@@ -33,18 +34,16 @@ export default function GeradorAds() {
   const [display2, setDisplay2] = useState('none');
 
   const [company, setCompany] = useState();
-  const [audience, setAudience] = useState();
-  const [resume, setResume] = useState();
+  const [product, setProduct] = useState();
+  const [tom, setTom] = useState();
 
-  const [titles, setTitles] = useState();
   const [title1, setTitle1] = useState();
   const [title2, setTitle2] = useState();
   const [title3, setTitle3] = useState();
-  const [title4, setTitle4] = useState();
-  const [title5, setTitle5] = useState();
-  const [title6, setTitle6] = useState();
+  // const [title4, setTitle4] = useState();
+  // const [title5, setTitle5] = useState();
+  // const [title6, setTitle6] = useState();
 
-  const [descriptions, setDescriptions] = useState();
   const [description1, setDescription1] = useState();
   const [description2, setDescription2] = useState();
   const [description3, setDescription3] = useState();
@@ -53,7 +52,7 @@ export default function GeradorAds() {
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
-  const [avoidKeywords, setAvoidKeywords] = useState([]);
+  const [productDescription, setProductDescription] = useState([]);
   const [id2, setId2] = useState(1);
   const [name2, setName2] = useState('');
 
@@ -71,7 +70,7 @@ export default function GeradorAds() {
 
     setVisibility('visible');
 
-    getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
+    getTitlesProduct(locale, company, product, keywords.toString(), productDescription.toString(),tom)
       .then((res) => {
         setIsLoadingT(false);
 
@@ -86,9 +85,9 @@ export default function GeradorAds() {
           setTitle1(titles[0]);
           setTitle2(titles[1]);
           setTitle3(titles[2]);
-          setTitle4(titles[3]);
-          setTitle5(titles[4]);
-          setTitle6(titles[5]);
+          // setTitle4(titles[3]);
+          // setTitle5(titles[4]);
+          // setTitle6(titles[5]);
         })
 
       })
@@ -99,7 +98,7 @@ export default function GeradorAds() {
       })
       .finally();
 
-    getDescriptionsAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
+    getDescriptionsProduct(locale, company, product, keywords.toString(), productDescription.toString(),tom)
       .then((res) => {
         setIsLoadingD(false);
 
@@ -125,7 +124,7 @@ export default function GeradorAds() {
       .finally();
   }
 
-  const arrayTitles = [`${title1}/${title2}`, `${title3}/${title4}`, `${title5}/${title6}`];
+  const arrayTitles = [`${title1}`, `${title2}`, `${title3}`];
   const arrayDescriptions = [`${description1}`, `${description2}`, `${description3}`];
 
   const [index, setIndex] = useState(0);
@@ -188,7 +187,7 @@ export default function GeradorAds() {
   const handleAddClick2 = (event) => {
     if (name2 != '') {
       setId2(id => id + 1);
-      setAvoidKeywords(list => [...list, name2]);
+      setProductDescription(list => [...list, name2]);
       setName2('');
     }
   }
@@ -200,7 +199,7 @@ export default function GeradorAds() {
 
   const handleClear2 = () => {
     setId2(0);
-    setAvoidKeywords([]);
+    setProductDescription([]);
   }
 
   const handleEdit = () => {
@@ -225,10 +224,10 @@ export default function GeradorAds() {
     },
     {
       isRequired: true,
-      id: 'audience',
-      title: t('audiencia'),
-      value: audience,
-      onChange: (e) => setAudience(e.target.value)
+      id: 'product',
+      title: t('nomeProduto'),
+      value: product,
+      onChange: (e) => setProduct(e.target.value)
     }
   ]
 
@@ -254,27 +253,27 @@ export default function GeradorAds() {
       onChange: (e) => setTitle3(e.target.value),
       colSpan: 1
     },
-    {
-      id: 'title4',
-      title: `${t('titulo')} 4`,
-      value: title4 || '',
-      onChange: (e) => setTitle4(e.target.value),
-      colSpan: 1
-    },
-    {
-      id: 'title5',
-      title: `${t('titulo')} 5`,
-      value: title5 || '',
-      onChange: (e) => setTitle5(e.target.value),
-      colSpan: 1
-    },
-    {
-      id: 'title6',
-      title: `${t('titulo')} 6`,
-      value: title6 || '',
-      onChange: (e) => setTitle6(e.target.value),
-      colSpan: 1
-    },
+    // {
+    //   id: 'title4',
+    //   title: `${t('titulo')} 4`,
+    //   value: title4 || '',
+    //   onChange: (e) => setTitle4(e.target.value),
+    //   colSpan: 1
+    // },
+    // {
+    //   id: 'title5',
+    //   title: `${t('titulo')} 5`,
+    //   value: title5 || '',
+    //   onChange: (e) => setTitle5(e.target.value),
+    //   colSpan: 1
+    // },
+    // {
+    //   id: 'title6',
+    //   title: `${t('titulo')} 6`,
+    //   value: title6 || '',
+    //   onChange: (e) => setTitle6(e.target.value),
+    //   colSpan: 1
+    // },
     {
       id: 'description1',
       title: `${t('descricao')} 1`,
@@ -316,25 +315,25 @@ export default function GeradorAds() {
       title: `${t('titulo')} 3:`,
       total: title3?.replace(/\s/g, '').length,
       cont: 30
-    },
-    {
-      color: title4?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-      title: `${t('titulo')} 4:`,
-      total: title4?.replace(/\s/g, '').length,
-      cont: 30
-    },
-    {
-      color: title5?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-      title: `${t('titulo')} 5:`,
-      total: title5?.replace(/\s/g, '').length,
-      cont: 30
-    },
-    {
-      color: title6?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
-      title: `${t('titulo')} 6:`,
-      total: title6?.replace(/\s/g, '').length,
-      cont: 30
     }
+    // {
+    //   color: title4?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+    //   title: `${t('titulo')} 4:`,
+    //   total: title4?.replace(/\s/g, '').length,
+    //   cont: 30
+    // },
+    // {
+    //   color: title5?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+    //   title: `${t('titulo')} 5:`,
+    //   total: title5?.replace(/\s/g, '').length,
+    //   cont: 30
+    // },
+    // {
+    //   color: title6?.replace(/\s/g, '').length > 30 ? 'red' : 'green',
+    //   title: `${t('titulo')} 6:`,
+    //   total: title6?.replace(/\s/g, '').length,
+    //   cont: 30
+    // }
   ]
 
   const itemsDescriptions = [
@@ -380,7 +379,7 @@ export default function GeradorAds() {
                   value={item.value}
                   onChange={item.onChange} />
               ))}
-              <FormControl
+              {/* <FormControl
                 isRequired={true}>
                 <FormLabel
                   htmlFor={'description'}>
@@ -393,7 +392,7 @@ export default function GeradorAds() {
                   bg={bg}
                   value={resume || ''}
                   onChange={(e) => setResume(e.target.value)} />
-              </FormControl>
+              </FormControl> */}
               <Flex
                 w='full'
                 flexDir={'column'}
@@ -457,7 +456,7 @@ export default function GeradorAds() {
                 <FormControl
                   isRequired>
                   <FormLabel>
-                    {t('evitarPalavraChave')}
+                    {t('caracteristicasProduto')}
                   </FormLabel>
                   <Flex
                     align={'center'}
@@ -484,9 +483,9 @@ export default function GeradorAds() {
                   </Flex>
                 </FormControl>
                 <div>
-                  {avoidKeywords.map((item) => {
+                  {productDescription.map((item) => {
                     const handleRemoveClick = () => {
-                      setAvoidKeywords(list => list.filter((entry) => entry !== item));
+                      setProductDescription(list => list.filter((entry) => entry !== item));
                     };
                     return (
                       <Tag
@@ -506,6 +505,32 @@ export default function GeradorAds() {
                   })}
                 </div>
               </Flex>
+              <FormControl
+                isRequired>
+                <FormLabel>
+                  Tom
+                </FormLabel>
+                <Select
+                  borderRadius={'30px'}
+                  bg={bg}
+                  onChange={(e)=>setTom(e.target.value)}>
+                  <option value="">
+
+                  </option>
+                  <option
+                    value="positivo">
+                    Positivo
+                  </option>
+                  <option
+                    value="negativo">
+                    Negativo
+                  </option>
+                  <option
+                    value="neutro">
+                    Neutro
+                  </option>
+                </Select>
+              </FormControl>
               <Button
                 value='Generate'
                 w='100%'
@@ -534,7 +559,7 @@ export default function GeradorAds() {
                 isIndeterminate />
               :
               <Text
-                color={'blue.400'}
+                fontWeight={'bold'}
                 fontSize='lg'>
                 {arrayTitles[index]}
                 {/* {title1}/{title2}/{title3}/{title4}/{title5}/{title6} */}

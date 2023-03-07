@@ -54,11 +54,10 @@ export default function GeradorInstagram() {
 
     getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
       .then((res) => {
-        // console.log(res);
-
         setIsLoading(false);
 
         const data = res;
+        console.log(data);
 
         data.choices.forEach(element => {
           const el = element.text;

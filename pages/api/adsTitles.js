@@ -68,6 +68,8 @@ export default function handler(req, res) {
 
   axios(config)
     .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      console.log(data);
       res.status(200).json(response.data);
     })
     .catch(function (error) {

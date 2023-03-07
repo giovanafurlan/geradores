@@ -37,5 +37,9 @@
   "aguarde": "Gerando texto... Aguarde",
 
   "__comment6.5__": "Gerador de Mídias Sociais",
-  "topico": "Tópico"
+  "topico": "Tópico",
+
+  "__comment6.6__": "Gerador de Descrição de Produtos",
+  "nomeProduto": "Nome do produto",
+  "caracteristicasProduto": "Características do produto"
 }

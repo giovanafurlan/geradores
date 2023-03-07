@@ -52,6 +52,10 @@ const Links = [
     {
         nome: 'Gerador anúncio youtube',
         link: '/geradorYoutube'
+    },
+    {
+        nome: 'Gerador descrição produto',
+        link: '/geradorProduto'
     }
 ];
 

@@ -56,6 +56,62 @@ const getTitlesAds = async (
     });
 };
 
+const getDescriptionsProduct = async (
+  locale,
+  company,
+  product,
+  keywords,
+  productDescription,
+  tom
+) => {
+  return axios
+    .get("/api/productDescriptions", {
+      params: {
+        locale: locale,
+        company: company,
+        product: product,
+        keywords: keywords,
+        productDescription: productDescription,
+        tom: tom,
+      },
+    })
+    .then((e) => {
+      return e.data;
+    })
+    .catch((e) => {
+      console.log(e);
+      return;
+    });
+};
+
+const getTitlesProduct = async (
+  locale,
+  company,
+  product,
+  keywords,
+  productDescription,
+  tom
+) => {
+  return axios
+    .get("/api/productTitles", {
+      params: {
+        locale: locale,
+        company: company,
+        product: product,
+        keywords: keywords,
+        productDescription: productDescription,
+        tom: tom,
+      },
+    })
+    .then((e) => {
+      return e.data;
+    })
+    .catch((e) => {
+      console.log(e);
+      return;
+    });
+};
+
 const getTitle = async (locale, keywords, type) => {
   return axios
     .get("/api/generateTitle", {
@@ -69,7 +125,7 @@ const getTitle = async (locale, keywords, type) => {
       return e.data;
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       return;
     });
 };
@@ -87,7 +143,7 @@ const getDescription = async (locale, keywords, type) => {
       return e.data;
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       return;
     });
 };
@@ -113,40 +169,37 @@ const getText = async (
       return e.data;
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       return;
     });
 };
 
-const getSocialMedia = async (
-  locale,
-  caracteres,
-  topic,
-  keywords
-) => {
+const getSocialMedia = async (locale, caracteres, topic, keywords) => {
   return axios
     .get("/api/generateSocialMedia", {
       params: {
         locale: locale,
         caracteres: caracteres,
         topic: topic,
-        keywords: keywords
+        keywords: keywords,
       },
     })
     .then((e) => {
       return e.data;
     })
     .catch((e) => {
-      // console.log(e);
+      console.log(e);
       return;
     });
 };
 
-
-export { 
-  getTitlesAds, 
-  getDescriptionsAds, 
-  getDescription, 
-  getTitle, 
+export {
+  getTitlesAds,
+  getDescriptionsAds,
+  getTitlesProduct,
+  getDescriptionsProduct,
+  getDescription,
+  getTitle,
   getText,
-  getSocialMedia };
+  getSocialMedia,
+};
