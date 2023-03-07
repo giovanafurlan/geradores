@@ -116,7 +116,8 @@ export default function GeradorSocialMedia() {
           <form>
             <Flex
               flexDir={'column'}
-              gap={'4'}>
+              gap={'4'}
+              align='center'>
               <FormControl
                 isRequired>
                 <FormLabel
@@ -147,10 +148,7 @@ export default function GeradorSocialMedia() {
                   <Button
                     onClick={handleAddClick}
                     variant='button'
-                    mt={{
-                      '2xl': '8',
-                      lg: '12'
-                    }}>
+                    mt='8'>
                     {t('adicionar')}
                   </Button>
                   <Button
@@ -158,10 +156,7 @@ export default function GeradorSocialMedia() {
                     variant='button-outline'
                     color={color}
                     borderColor={color}
-                    mt={{
-                      '2xl': '8',
-                      lg: '12'
-                    }}>
+                    mt='8'>
                     {t('limpar')}
                   </Button>
                 </Flex>

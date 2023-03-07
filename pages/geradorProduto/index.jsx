@@ -359,13 +359,13 @@ export default function GeradorProduto() {
     },
     {
       color: description4?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
-      title: `${t('descricao')} 3:`,
+      title: `${t('descricao')} 4:`,
       total: description4?.replace(/\s/g, '').length,
       cont: 250
     },
     {
       color: description5?.replace(/\s/g, '').length > 250 ? 'red' : 'green',
-      title: `${t('descricao')} 3:`,
+      title: `${t('descricao')} 5:`,
       total: description5?.replace(/\s/g, '').length,
       cont: 250
     }
@@ -589,11 +589,11 @@ export default function GeradorProduto() {
                 display={display}
                 borderRadius={'30px'}
                 p='4'
-                gap={'4'}
+                gap={'2'}
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
-                  fontSize='lg'>
+                  fontSize='2xl'>
                   {/* {arrayTitles[index]} */}
                   {title1}
                 </Text>
@@ -638,7 +638,7 @@ export default function GeradorProduto() {
                 display={display}
                 borderRadius={'30px'}
                 p='4'
-                gap={'4'}
+                gap={'2'}
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
@@ -687,7 +687,7 @@ export default function GeradorProduto() {
                 display={display}
                 borderRadius={'30px'}
                 p='4'
-                gap={'4'}
+                gap={'2'}
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
@@ -736,7 +736,7 @@ export default function GeradorProduto() {
                 display={display}
                 borderRadius={'30px'}
                 p='4'
-                gap={'4'}
+                gap={'2'}
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
@@ -757,7 +757,7 @@ export default function GeradorProduto() {
                 <Flex
                   gap='2'
                   display={display}>
-                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
+                  {itemsHeadlines.slice(3, 4).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
@@ -769,7 +769,7 @@ export default function GeradorProduto() {
                 <Flex
                   gap='2'
                   display={display}>
-                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
+                  {itemsDescriptions.slice(3, 4).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
@@ -785,7 +785,7 @@ export default function GeradorProduto() {
                 display={display}
                 borderRadius={'30px'}
                 p='4'
-                gap={'4'}
+                gap={'2'}
                 alignItems={'initial'}>
                 <Text
                   fontWeight={'bold'}
@@ -806,7 +806,7 @@ export default function GeradorProduto() {
                 <Flex
                   gap='2'
                   display={display}>
-                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
+                  {itemsHeadlines.slice(4, 5).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
@@ -818,7 +818,7 @@ export default function GeradorProduto() {
                 <Flex
                   gap='2'
                   display={display}>
-                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
+                  {itemsDescriptions.slice(4, 5).map((item, idx) => (
                     <Item
                       key={idx}
                       color={item.color}
