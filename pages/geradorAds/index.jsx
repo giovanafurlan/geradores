@@ -71,7 +71,9 @@ export default function GeradorAds() {
 
     setVisibility('visible');
 
-    getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
+    var midiaSocial = 'Google Ads';
+
+    getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoadingT(false);
 

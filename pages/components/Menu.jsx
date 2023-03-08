@@ -87,7 +87,8 @@ export default function Simple({ children }) {
                             display={{
                                 base: 'none',
                                 md: 'flex'
-                            }}>
+                            }}
+                            fontSize='sm'>
                             {Links.map((link) => (
                                 <Link
                                     key={link.link}

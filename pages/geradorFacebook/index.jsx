@@ -34,9 +34,17 @@ export default function GeradorFacebook() {
   const [display, setDisplay] = useState('inline-flex');
   const [display2, setDisplay2] = useState('none');
 
-  const [company, setCompany] = useState();
-  const [audience, setAudience] = useState();
-  const [resume, setResume] = useState();
+  const [company, setCompany] = useState('Apple');
+  const [audience, setAudience] = useState('Empresários');
+  const [resume, setResume] = useState('Empresa multinacional especializa em smartphones, tablets e notebooks');
+
+  const [keywords, setKeywords] = useState(['iphone', 'ipad', 'macbook']);
+  const [id, setId] = useState(1);
+  const [name, setName] = useState('');
+
+  const [avoidKeywords, setAvoidKeywords] = useState(['samsung', 'xiaomi', 'motorola']);
+  const [id2, setId2] = useState(1);
+  const [name2, setName2] = useState('');
 
   const [title1, setTitle1] = useState();
   const [title2, setTitle2] = useState();
@@ -48,14 +56,6 @@ export default function GeradorFacebook() {
   const [description1, setDescription1] = useState();
   const [description2, setDescription2] = useState();
   const [description3, setDescription3] = useState();
-
-  const [keywords, setKeywords] = useState([]);
-  const [id, setId] = useState(1);
-  const [name, setName] = useState('');
-
-  const [avoidKeywords, setAvoidKeywords] = useState([]);
-  const [id2, setId2] = useState(1);
-  const [name2, setName2] = useState('');
 
   const bg = useColorModeValue('white', 'gray.900');
   const bg1 = useColorModeValue('gray.100', 'gray.900');
@@ -73,7 +73,9 @@ export default function GeradorFacebook() {
 
     setVisibility('visible');
 
-    getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
+    var midiaSocial = 'Facebook';
+
+    getTitlesAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoadingT(false);
 
@@ -101,7 +103,7 @@ export default function GeradorFacebook() {
       })
       .finally();
 
-    getDescriptionsAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString())
+    getDescriptionsAds(locale, company, resume, audience, keywords.toString(), avoidKeywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoadingD(false);
 
@@ -558,29 +560,31 @@ export default function GeradorFacebook() {
                 isIndeterminate />
               :
               <Flex
+                w='full'
                 flexDir={'column'}
                 bg={bg2}
                 gap='2'
                 borderRadius={'lg'}>
                 <Image
-                  w='full'
-                  h='sm'
+                  w='md'
+                  h='xs'
+                  m='0 auto'
                   borderRadius={'lg'}
                   src='/images/facebook.png' />
                 <Text
-                px='2'
+                  px='2'
                   textTransform={'uppercase'}>
                   {company}.com
                 </Text>
                 <Text
-                px='2'
+                  px='2'
                   fontWeight={'bold'}>
                   {arrayTitles[index]}
                   {/* {description1}/{description2}/{description3} */}
                 </Text>
                 <Text
-                px='2'
-                pb='2'>
+                  px='2'
+                  pb='2'>
                   {arrayTitles[index]}
                   {/* {description1}/{description2}/{description3} */}
                 </Text>
@@ -593,7 +597,6 @@ export default function GeradorFacebook() {
               :
               <>
                 <Flex
-                  gap='2'
                   display={display}
                   flexWrap='wrap'>
                   {itemsHeadlines.map((item, idx) => (
@@ -606,7 +609,6 @@ export default function GeradorFacebook() {
                   ))}
                 </Flex>
                 <Flex
-                  gap='2'
                   display={display}>
                   {itemsDescriptions.map((item, idx) => (
                     <Item

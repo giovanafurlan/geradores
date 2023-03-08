@@ -29,9 +29,9 @@ export default function GeradorInstagram() {
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [topic, setTopic] = useState();
+  const [topic, setTopic] = useState('Conta do linkedIn github que da dicas de programação');
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywords, setKeywords] = useState(['programação','tecnologia']);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
@@ -51,8 +51,9 @@ export default function GeradorInstagram() {
     setVisibility('visible');
 
     var caracteres = 20;
+    var midiaSocial = 'LinkedIn';
 
-    getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
+    getSocialMedia(locale, caracteres, topic, keywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoading(false);
 

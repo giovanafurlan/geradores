@@ -6,7 +6,8 @@ const getDescriptionsAds = async (
   resume,
   audience,
   keywords,
-  avoidKeywords
+  avoidKeywords,
+  midiaSocial
 ) => {
   return axios
     .get("/api/adsDescriptions", {
@@ -17,6 +18,7 @@ const getDescriptionsAds = async (
         audience: audience,
         keywords: keywords,
         avoidKeywords: avoidKeywords,
+        midiaSocial: midiaSocial,
       },
     })
     .then((e) => {
@@ -34,7 +36,8 @@ const getTitlesAds = async (
   resume,
   audience,
   keywords,
-  avoidKeywords
+  avoidKeywords,
+  midiaSocial
 ) => {
   return axios
     .get("/api/adsTitles", {
@@ -45,6 +48,7 @@ const getTitlesAds = async (
         audience: audience,
         keywords: keywords,
         avoidKeywords: avoidKeywords,
+        midiaSocial: midiaSocial,
       },
     })
     .then((e) => {
@@ -174,7 +178,13 @@ const getText = async (
     });
 };
 
-const getSocialMedia = async (locale, caracteres, topic, keywords) => {
+const getSocialMedia = async (
+  locale,
+  caracteres,
+  topic,
+  keywords,
+  midiaSocial
+) => {
   return axios
     .get("/api/generateSocialMedia", {
       params: {
@@ -182,6 +192,7 @@ const getSocialMedia = async (locale, caracteres, topic, keywords) => {
         caracteres: caracteres,
         topic: topic,
         keywords: keywords,
+        midiaSocial: midiaSocial,
       },
     })
     .then((e) => {

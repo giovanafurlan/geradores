@@ -29,9 +29,9 @@ export default function GeradorSocialMedia() {
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [topic, setTopic] = useState();
+  const [topic, setTopic] = useState('Conta do Quebrando Tabu focado em questões sociais');
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywords, setKeywords] = useState(['midia social', 'tabu']);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
@@ -51,8 +51,9 @@ export default function GeradorSocialMedia() {
     setVisibility('visible');
 
     var caracteres = 20;
+    var midiaSocial = 'Internet';
 
-    getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
+    getSocialMedia(locale, caracteres, topic, keywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoading(false);
 
@@ -95,8 +96,8 @@ export default function GeradorSocialMedia() {
   const handleClear = () => {
     setId(0);
     setKeywords([]);
-  } 
-  
+  }
+
   const [message, setMessage] = useState('');
 
   const handleChange = (event) => {

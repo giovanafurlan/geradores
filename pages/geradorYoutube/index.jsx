@@ -22,16 +22,16 @@ import { getSocialMedia } from "../../services/getApis";
 import CopyClipboard from "../components/CopyClipboard";
 import Menu from '../components/Menu';
 
-export default function GeradorInstagram() {
+export default function GeradorYoutube() {
 
   const { t } = useTranslation("common");
 
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [topic, setTopic] = useState();
+  const [topic, setTopic] = useState('Canal do Youtube Multishow');
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywords, setKeywords] = useState(['tv', 'programas', 'bbb']);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
@@ -51,8 +51,9 @@ export default function GeradorInstagram() {
     setVisibility('visible');
 
     var caracteres = 20;
+    var midiaSocial = 'Youtube';
 
-    getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
+    getSocialMedia(locale, caracteres, topic, keywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoading(false);
 
@@ -95,8 +96,8 @@ export default function GeradorInstagram() {
   const handleClear = () => {
     setId(0);
     setKeywords([]);
-  } 
-  
+  }
+
   const [message, setMessage] = useState('');
 
   const handleChange = (event) => {

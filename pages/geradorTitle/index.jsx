@@ -33,10 +33,12 @@ export default function GeradorTitle() {
   const [isLoadingD, setIsLoadingD] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [keywords, setKeyword] = useState([]);
+  const [type, setType] = useState();
+  
+  const [keywords, setKeyword] = useState(['e-commerce','amazon']);
+
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
-  const [type, setType] = useState();
   const [h1, seth1] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();

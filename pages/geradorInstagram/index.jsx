@@ -22,16 +22,16 @@ import { getSocialMedia } from "../../services/getApis";
 import CopyClipboard from "../components/CopyClipboard";
 import Menu from '../components/Menu';
 
-export default function GeradorLinkedin() {
+export default function GeradorInstagram() {
 
   const { t } = useTranslation("common");
 
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState('hidden');
 
-  const [topic, setTopic] = useState();
+  const [topic, setTopic] = useState('Conta do instagram gossip do dia focado em atualizações sobre a vida dos famosos');
 
-  const [keywords, setKeywords] = useState([]);
+  const [keywords, setKeywords] = useState(['fofoca','famosos']);
   const [id, setId] = useState(1);
   const [name, setName] = useState('');
 
@@ -51,8 +51,9 @@ export default function GeradorLinkedin() {
     setVisibility('visible');
 
     var caracteres = 20;
+    var midiaSocial = 'Instagram';
 
-    getSocialMedia(locale, caracteres, topic, keywords.toString().toString())
+    getSocialMedia(locale, caracteres, topic, keywords.toString(), midiaSocial)
       .then((res) => {
         setIsLoading(false);
 

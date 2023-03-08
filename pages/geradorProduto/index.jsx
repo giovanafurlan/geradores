@@ -14,6 +14,7 @@ import {
   TagCloseButton,
   TagLabel,
   Text,
+  Textarea,
   useColorModeValue
 } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
@@ -32,9 +33,17 @@ export default function GeradorProduto() {
   const [display, setDisplay] = useState('inline-flex');
   const [display2, setDisplay2] = useState('none');
 
-  const [company, setCompany] = useState();
-  const [product, setProduct] = useState();
+  const [company, setCompany] = useState('Gontijo');
+  const [product, setProduct] = useState('Ônibus de viagem');
   const [tom, setTom] = useState();
+
+  const [keywords, setKeywords] = useState(['onibus', 'viagem']);
+  const [id, setId] = useState(1);
+  const [name, setName] = useState('');
+
+  const [productDescription, setProductDescription] = useState(['confortável', 'seguro']);
+  const [id2, setId2] = useState(1);
+  const [name2, setName2] = useState('');
 
   const [title1, setTitle1] = useState();
   const [title2, setTitle2] = useState();
@@ -48,15 +57,19 @@ export default function GeradorProduto() {
   const [description4, setDescription4] = useState();
   const [description5, setDescription5] = useState();
 
-  const [keywords, setKeywords] = useState([]);
-  const [id, setId] = useState(1);
-  const [name, setName] = useState('');
-
-  const [productDescription, setProductDescription] = useState([]);
-  const [id2, setId2] = useState(1);
-  const [name2, setName2] = useState('');
+  const [readOnly1, setReadOnly1] = useState(true);
+  const [border1, setBorder1] = useState('none');
+  const [readOnly2, setReadOnly2] = useState(true);
+  const [border2, setBorder2] = useState('none');
+  const [readOnly3, setReadOnly3] = useState(true);
+  const [border3, setBorder3] = useState('none');
+  const [readOnly4, setReadOnly4] = useState(true);
+  const [border4, setBorder4] = useState('none');
+  const [readOnly5, setReadOnly5] = useState(true);
+  const [border5, setBorder5] = useState('none');
 
   const bg = useColorModeValue('white', 'gray.900');
+  const bg2 = useColorModeValue('gray.100', 'gray.900');
   const color = useColorModeValue('primary', 'white');
 
   const route = useRouter();
@@ -204,9 +217,13 @@ export default function GeradorProduto() {
   }
 
   const handleEdit = () => {
-
     setDisplay('none');
     setDisplay2('inline');
+  }
+
+  const handleEdit2 = (border, read) => {
+    border = '1px';
+    read = false;
   }
 
   const handleSave = () => {
@@ -230,6 +247,64 @@ export default function GeradorProduto() {
       value: product,
       onChange: (e) => setProduct(e.target.value)
     }
+  ]
+
+  const content = [
+    {
+      title: title1,
+      onChangeTitle: (e) => setTitle1(e.target.value),
+      description: description1,
+      onChangeDescription: (e) => setDescription1(e.target.value),
+      readOnly: readOnly1,
+      border: border1,
+      slice1: 0,
+      slice2: 1,
+      onClickEdit: (e) => { setBorder1('1px'); setReadOnly1(false) }
+    },
+    {
+      title: title2,
+      onChangeTitle: (e) => setTitle2(e.target.value),
+      description: description2,
+      onChangeDescription: (e) => setDescription2(e.target.value),
+      readOnly: readOnly2,
+      border: border2,
+      slice1: 1,
+      slice2: 2,
+      onClickEdit: (e) => { setBorder2('1px'); setReadOnly2(false) }
+    },
+    {
+      title: title3,
+      onChangeTitle: (e) => setTitle3(e.target.value),
+      description: description3,
+      onChangeDescription: (e) => setDescription3(e.target.value),
+      readOnly: readOnly3,
+      border: border3,
+      slice1: 2,
+      slice2: 3,
+      onClickEdit: (e) => { setBorder3('1px'); setReadOnly3(false) }
+    },
+    {
+      title: title4,
+      onChangeTitle: (e) => setTitle4(e.target.value),
+      description: description4,
+      onChangeDescription: (e) => setDescription4(e.target.value),
+      readOnly: readOnly4,
+      border: border4,
+      slice1: 3,
+      slice2: 4,
+      onClickEdit: (e) => { setBorder4('1px'); setReadOnly4(false) }
+    },
+    {
+      title: title5,
+      onChangeTitle: (e) => setTitle5(e.target.value),
+      description: description5,
+      onChangeDescription: (e) => setDescription5(e.target.value),
+      readOnly: readOnly5,
+      border: border5,
+      slice1: 4,
+      slice2: 5,
+      onClickEdit: (e) => { setBorder5('1px'); setReadOnly5(false) }
+    },
   ]
 
   const editFields = [
@@ -558,7 +633,7 @@ export default function GeradorProduto() {
         <GridItem
           colSpan={'2'}
           visibility={visibility}>
-          <Box
+          {/* <Box
             w='100%'
             mb='4'>
             <Button
@@ -574,7 +649,7 @@ export default function GeradorProduto() {
               fontWeight='normal'>
               Visualizar títulos e descrições
             </Button>
-          </Box>
+          </Box> */}
           {isLoadingT
             ?
             <CircularProgress
@@ -583,251 +658,24 @@ export default function GeradorProduto() {
             <Flex
               flexDir={'column'}
               gap='4'>
-              <Flex
-                flexDir={'column'}
-                bg={bg}
-                display={display}
-                borderRadius={'30px'}
-                p='4'
-                gap={'2'}
-                alignItems={'initial'}>
-                <Text
-                  fontWeight={'bold'}
-                  fontSize='2xl'>
-                  {/* {arrayTitles[index]} */}
-                  {title1}
-                </Text>
-                {isLoadingD
-                  ?
-                  <CircularProgress
-                    isIndeterminate />
-                  :
-                  <Text>
-                    {/* {arrayDescriptions[index]} */}
-                    {description1}
-                  </Text>
-                }
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsHeadlines.slice(0, 1).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsDescriptions.slice(0, 1).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-              </Flex>
-              <Flex
-                flexDir={'column'}
-                bg={bg}
-                display={display}
-                borderRadius={'30px'}
-                p='4'
-                gap={'2'}
-                alignItems={'initial'}>
-                <Text
-                  fontWeight={'bold'}
-                  fontSize='2xl'>
-                  {/* {arrayTitles[index]} */}
-                  {title2}
-                </Text>
-                {isLoadingD
-                  ?
-                  <CircularProgress
-                    isIndeterminate />
-                  :
-                  <Text>
-                    {/* {arrayDescriptions[index]} */}
-                    {description2}
-                  </Text>
-                }
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsHeadlines.slice(1, 2).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsDescriptions.slice(1, 2).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-              </Flex>
-              <Flex
-                flexDir={'column'}
-                bg={bg}
-                display={display}
-                borderRadius={'30px'}
-                p='4'
-                gap={'2'}
-                alignItems={'initial'}>
-                <Text
-                  fontWeight={'bold'}
-                  fontSize='2xl'>
-                  {/* {arrayTitles[index]} */}
-                  {title3}
-                </Text>
-                {isLoadingD
-                  ?
-                  <CircularProgress
-                    isIndeterminate />
-                  :
-                  <Text>
-                    {/* {arrayDescriptions[index]} */}
-                    {description3}
-                  </Text>
-                }
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsHeadlines.slice(2, 3).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsDescriptions.slice(2, 3).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-              </Flex>
-              <Flex
-                flexDir={'column'}
-                bg={bg}
-                display={display}
-                borderRadius={'30px'}
-                p='4'
-                gap={'2'}
-                alignItems={'initial'}>
-                <Text
-                  fontWeight={'bold'}
-                  fontSize='2xl'>
-                  {/* {arrayTitles[index]} */}
-                  {title4}
-                </Text>
-                {isLoadingD
-                  ?
-                  <CircularProgress
-                    isIndeterminate />
-                  :
-                  <Text>
-                    {/* {arrayDescriptions[index]} */}
-                    {description4}
-                  </Text>
-                }
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsHeadlines.slice(3, 4).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsDescriptions.slice(3, 4).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-              </Flex>
-              <Flex
-                flexDir={'column'}
-                bg={bg}
-                display={display}
-                borderRadius={'30px'}
-                p='4'
-                gap={'2'}
-                alignItems={'initial'}>
-                <Text
-                  fontWeight={'bold'}
-                  fontSize='2xl'>
-                  {/* {arrayTitles[index]} */}
-                  {title5}
-                </Text>
-                {isLoadingD
-                  ?
-                  <CircularProgress
-                    isIndeterminate />
-                  :
-                  <Text>
-                    {/* {arrayDescriptions[index]} */}
-                    {description5}
-                  </Text>
-                }
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsHeadlines.slice(4, 5).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-                <Flex
-                  gap='2'
-                  display={display}>
-                  {itemsDescriptions.slice(4, 5).map((item, idx) => (
-                    <Item
-                      key={idx}
-                      color={item.color}
-                      title={item.title}
-                      total={item.total}
-                      cont={item.cont} />
-                  ))}
-                </Flex>
-              </Flex>
+              {content.map((item, idx) => (
+                <Content
+                  key={idx}
+                  display={display}
+                  title={item.title}
+                  onChangeTitle={item.onChangeTitle}
+                  isLoadingD={isLoadingD}
+                  description={item.description}
+                  onChangeDescription={item.onChangeDescription}
+                  readOnly={item.readOnly}
+                  border={item.border}
+                  itemsHeadlines={itemsHeadlines}
+                  itemsDescriptions={itemsDescriptions}
+                  slice1={item.slice1}
+                  slice2={item.slice2}
+                  onClickEdit={item.onClickEdit} />
+              ))}
+              
             </Flex>
           }
           <Box
@@ -865,6 +713,88 @@ export default function GeradorProduto() {
     </Menu>
   )
 }
+const Content = ({
+  display,
+  title,
+  onChangeTitle,
+  isLoadingD,
+  description,
+  onChangeDescription,
+  readOnly,
+  border,
+  itemsHeadlines,
+  itemsDescriptions,
+  slice1,
+  slice2,
+  onClickEdit
+}) => {
+  const bg = useColorModeValue('gray.100', 'gray.900');
+
+  return (
+    <Flex
+      flexDir={'column'}
+      bg={bg}
+      display={display}
+      borderRadius={'30px'}
+      p='4'
+      gap={'4'}
+      alignItems={'initial'}>
+      <Input
+        value={title}
+        onChange={onChangeTitle}
+        readOnly={readOnly}
+        fontWeight={'bold'}
+        fontSize='2xl'
+        px='0'
+        border={border}
+        borderColor='gray.300' />
+      {isLoadingD
+        ?
+        <CircularProgress
+          isIndeterminate />
+        :
+        <Textarea
+          value={description}
+          onChange={onChangeDescription}
+          readOnly={readOnly}
+          rows='2'
+          px='0'
+          border={border}
+          borderColor='gray.300' />
+      }
+      <Flex
+        display={display}>
+        {itemsHeadlines?.slice(slice1,slice2).map((item, idx) => (
+          <Item
+            key={idx}
+            color={item.color}
+            title={item.title}
+            total={item.total}
+            cont={item.cont} />
+        ))}
+      </Flex>
+      <Flex
+        mt='-10px'
+        display={display}>
+        {itemsDescriptions?.slice(slice1,slice2).map((item, idx) => (
+          <Item
+            key={idx}
+            color={item.color}
+            title={item.title}
+            total={item.total}
+            cont={item.cont} />
+        ))}
+      </Flex>
+      <Button
+        mt='-10px'
+        bg={bg}
+        onClick={onClickEdit}>
+        Editar
+      </Button>
+    </Flex>
+  )
+}
+
 const EditableField = ({
   colSpan,
   isRequired,
@@ -952,3 +882,4 @@ const Item = ({
     </Tag>
   )
 }
+
